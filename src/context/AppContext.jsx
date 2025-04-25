@@ -7,6 +7,8 @@ export const AppContext = createContext()
 export const AppContextProvider = ({children})=>{
 
     const currency = import.meta.VITE_CURRENCY
+
+    console.log(currency)
   
     const navigate = useNavigate()
     const [user,setUser] = useState(false)
@@ -64,8 +66,37 @@ export const AppContextProvider = ({children})=>{
           toast.success("Removed from Cart")
     }
 
+    const getCartCount =()=>{
+       let totalCount = 0
+
+       for( const itemId in cartItems)
+       {
+         totalCount += cartItems[itemId]
+       }
+
+       return totalCount
+    }
+
+  const getCartAmount = ()=>{
+     let totalAmount = 0 
+
+     for ( const itemId in cartItems )
+     {
+        const item = products.find((product)=> product._id == itemId)
+
+       if( cartItems[itemId] >0)
+        totalAmount += item.offerPrice * cartItems[itemId]
+
+     }
+
+     return totalAmount
+
+  }
+
+
+
     const value = {navigate,user,setUser,isSeller,setIsSeller , showUserLogin , setShowUserLogin , products , cartItems ,
-       addToCart , updateCartItem , removeCartItem , searchQuery , setSearchQuery
+       addToCart , updateCartItem , removeCartItem , searchQuery , setSearchQuery , currency , getCartAmount , getCartCount
     }
 
   return <AppContext.Provider value={value}>
