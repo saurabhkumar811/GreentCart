@@ -5,8 +5,8 @@ function SellerLogin() {
 
     const { isSeller , setIsSeller , navigate } = useAppContext()
 
-    const [ email , setEmail] = useState("")
-    const [ password , setPassword] = useState("")
+    const [ email , setEmail] = useState("fvdf@wef")
+    const [ password , setPassword] = useState("ewfwr")
 
     const onSubmitHandler =(e)=>{
         e.preventDefault()
